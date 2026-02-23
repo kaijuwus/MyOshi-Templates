@@ -1,0 +1,305 @@
+/* =========================================================
+   🍓 MYOSHI — Strawberry Ombre Glass (beginner friendly template)
+   by Kaijuwus (pls credit if you share :3)
+   ---------------------------------------------------------
+    Keeps your MyOshi background image
+    Strawberry ombre headers + creamy glass cards
+    Simple “DO NOT TOUCH” sections
+    Paste into "Custom CSS" in your profile settings
+    HTML Template coming soon!
+   ========================================================= */
+
+
+/* =========================================================
+   1)  ONLY TWEAK THESE (beginner-friendly controls)
+   ---------------------------------------------------------
+   Change THESE to customize the whole theme safely! 
+   ---------------------------------------------------------
+  I suggest to test after every change to not accentally break the code
+   ========================================================= */
+.profile-page{
+  /* ---- A0) 4-PART OMBRÉ (THIS CONTROLS THE PRETTY STRIP) ----
+     Change these 4 colors to ANY vibe you want (pastel = iridescent).
+     Optional: STOP-2 / STOP-3 controls where the blend shifts happen. */
+
+ /* DEFAULT COLORS PASTEL STRAWBERRY 1 → CREAM 2 → YELLOW 3 → PURPLE 4 OMBRÉ */
+
+--OMBRE-1: rgba(255,154,196,.76); /* strawberry pink */
+--OMBRE-2: rgba(255,248,252,.82); /* creamy white */
+--OMBRE-3: rgba(255,245,190,.72); /* soft pastel yellow */
+--OMBRE-4: rgba(232,214,255,.74); /* pastel lavender */
+
+--OMBRE-STOP-2: 32%;
+--OMBRE-STOP-3: 66%;
+
+  /* ---- A) STRAWBERRY COLORS (used for borders/glow/text accents) ----
+     Tip: if it looks “too pink”, increase JAM (deeper red). */
+  --PINK:  rgba(255,141,184,.70);   /* strawberry milk pink */
+  --ROSE:  rgba(255, 79,134,.55);   /* rosy middle */
+  --JAM:   rgba(216, 15, 58,.35);   /* jam red (try .45 for stronger strawberry) */
+
+  /* Card backgrounds (how “milky” the glass feels) */
+  --CREAM-TOP:    rgba(255,246,251,.92);
+  --CREAM-BOTTOM: rgba(255,255,255,.60);
+
+  /* Borders (more alpha = more outline) */
+  --BORDER:  rgba(216, 15, 58,.18);
+  --BORDER2: rgba(255,141,184,.22);
+
+  /* Text */
+  --INK:   rgba(56,18,34,.92);
+  --MUTED: rgba(56,18,34,.62);
+
+  /* ---- B) ROUNDNESS + SPACING ----
+     Bigger numbers = rounder / puffier */
+  --R-LG: 20px; /* card corners */
+  --R-MD: 16px; /* input/button corners */
+  --R-SM: 12px; /* small elements */
+
+  --CARD-PAD: 12px; /* IMPORTANT for header alignment */
+  --BLUR: 10px;     /* glass blur (0 = no blur) */
+
+  /* ---- C) GLOW CONTROL (YES it’s supported) ----
+     Turn glow OFF by setting --GLOW-ON to 0. */
+  --GLOW-ON: 1;          /* 1 = ON, 0 = OFF */
+  --GLOW-STRENGTH: 18px; /* bigger = glowier */
+  --GLOW-ALPHA: .22;     /* 0.10 subtle, 0.30 strong */
+
+  /* ---- D) SHADOWS (depth) ---- */
+  --SHADOW:  0 14px 34px rgba(216,15,58,.10);
+  --SHADOW2: 0 8px  18px rgba(56,18,34,.10);
+
+  font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
+  color: var(--INK) !important;
+
+  /* kaiju did NOT set background here, so your photo stays */
+  padding: 18px 12px;
+}
+
+
+/* =========================================================
+   2) 🚫 DO NOT TOUCH THIS SECTION (structure + “it doesn’t break” rules)
+   ---------------------------------------------------------
+   This section makes the layout behave and keeps headers flush.
+   ========================================================= */
+.profile-page, .profile-page * { box-sizing: border-box; }
+.profile-page { overflow-x: hidden; }
+
+
+/* =========================================================
+   3) Links (strawberry candy)
+   ---------------------------------------------------------
+   If you want different link color: tweak PINK/JAM above.
+   ========================================================= */
+.profile-page a, .profile-page a:visited{
+  color: rgba(216, 15, 58, .75) !important;
+  text-decoration: none !important;
+}
+.profile-page a:hover{
+  color: rgba(255, 47, 88, .95) !important;
+  text-shadow: 0 0 10px rgba(255,141,184,.45);
+}
+
+
+/* =========================================================
+   4) Cards (glass panels)
+   ---------------------------------------------------------
+   These are the big boxes around everything.
+   ========================================================= */
+.profile-page :is(
+  section, article, aside,
+  .card, .panel, .box,
+  [class*="card"], [class*="Card"],
+  [class*="panel"], [class*="Panel"],
+  [class*="module"], [class*="Module"],
+  [class*="widget"], [class*="Widget"]
+){
+  background: linear-gradient(180deg, var(--CREAM-TOP), var(--CREAM-BOTTOM)) !important;
+  border: 1px solid var(--BORDER2) !important;
+  border-radius: var(--R-LG) !important;
+
+  /* depth */
+  box-shadow: var(--SHADOW) !important;
+
+  /* glass */
+  backdrop-filter: blur(var(--BLUR));
+  -webkit-backdrop-filter: blur(var(--BLUR));
+
+  /* spacing + header alignment math */
+  padding: var(--CARD-PAD) !important;
+  overflow: hidden;
+}
+
+/* seam killer (removes random thin “lines” sometimes) */
+.profile-page :is(
+  section, article, aside,
+  .card, .panel, .box,
+  [class*="card"], [class*="Card"],
+  [class*="panel"], [class*="Panel"],
+  [class*="module"], [class*="Module"],
+  [class*="widget"], [class*="Widget"]
+){
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+
+/* =========================================================
+   5) Header bars (the strawberry 4-part ombré strip)
+   ---------------------------------------------------------
+   This is where the 4-color ombré shows.
+   ONLY tweak OMBRE-1 through OMBRE-4 (and stops) at the top.
+   ========================================================= */
+.profile-page :is(
+  .card-header, .panel-heading, .panel-header,
+  [class*="header"], [class*="Header"],
+  [class*="titlebar"], [class*="Titlebar"]
+){
+  /* This fixes the “header inset” issue by canceling card padding */
+  margin: calc(var(--CARD-PAD) * -1)
+          calc(var(--CARD-PAD) * -1)
+          var(--CARD-PAD)
+          calc(var(--CARD-PAD) * -1) !important;
+
+  padding: 10px 14px !important;
+
+  /* 4-part ombré */
+  background: linear-gradient(90deg,
+    var(--OMBRE-1) 0%,
+    var(--OMBRE-2) var(--OMBRE-STOP-2),
+    var(--OMBRE-3) var(--OMBRE-STOP-3),
+    var(--OMBRE-4) 100%
+  ) !important;
+
+  border-bottom: 1px solid var(--BORDER) !important;
+  color: var(--INK) !important;
+
+  border-radius: var(--R-LG) var(--R-LG) var(--R-MD) var(--R-MD) !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+}
+
+.profile-page :is(
+  .card-header *, .panel-heading *, .panel-header *,
+  [class*="header"] *, [class*="Header"] *,
+  [class*="titlebar"] *, [class*="Titlebar"] *
+){
+  color: inherit !important;
+}
+
+
+/* =========================================================
+   6) Inner “bubbles” (white rounded content boxes)
+   ---------------------------------------------------------
+   This keeps text areas looking pillowy inside cards.
+   ========================================================= */
+.profile-page :is(
+  .well, .inner, .content, .body, .panel-body,
+  [class*="body"], [class*="Body"],
+  [class*="content"], [class*="Content"]
+){
+  background: rgba(255,255,255,.70) !important;
+  border: 1px solid rgba(255,141,184,.18) !important;
+  border-radius: var(--R-MD) !important;
+}
+
+
+/* =========================================================
+   7) Inputs / textareas (strawberry cream)
+   ========================================================= */
+.profile-page :is(input, textarea, select){
+  font-family: inherit !important;
+  color: var(--INK) !important;
+}
+
+.profile-page textarea{
+  background: rgba(255,246,251,.85) !important;
+  border: 1px solid rgba(255,141,184,.22) !important;
+  border-radius: var(--R-MD) !important;
+  box-shadow: var(--SHADOW2) !important;
+}
+
+.profile-page input, .profile-page select{
+  background: rgba(255,246,251,.80) !important;
+  border: 1px solid rgba(216,15,58,.14) !important;
+  border-radius: var(--R-SM) !important;
+  box-shadow: var(--SHADOW2) !important;
+}
+
+.profile-page input::placeholder,
+.profile-page textarea::placeholder{
+  color: rgba(56,18,34,.42) !important;
+}
+
+.profile-page :is(textarea, input, select):focus{
+  outline: none !important;
+  border-color: rgba(216,15,58,.26) !important;
+  box-shadow: 0 0 0 3px rgba(255,141,184,.28) !important;
+}
+
+
+/* =========================================================
+   8) Buttons (strawberry milk mochi) 
+   ========================================================= */
+.profile-page :is(button, input[type="button"], input[type="submit"]){
+  background: linear-gradient(180deg,
+    rgba(255,141,184,.62),
+    rgba(255,246,251,.92)
+  ) !important;
+
+  color: var(--INK) !important;
+  border: 1px solid rgba(216,15,58,.14) !important;
+  border-radius: var(--R-MD) !important;
+  box-shadow: var(--SHADOW2) !important;
+}
+
+.profile-page :is(button:hover, input[type="button"]:hover, input[type="submit"]:hover){
+  filter: brightness(1.03) saturate(1.06);
+  box-shadow: 0 12px 26px rgba(216,15,58,.14) !important;
+}
+
+
+/* =========================================================
+   9) 🍓 GLOW LAYER (underneath the sections)
+   ---------------------------------------------------------
+   This adds a “cute aura” around cards + headers.
+   Turn off by setting the --GLOW-ON: 0; (to zero)
+   ========================================================= */
+.profile-page :is(
+  section, article, aside,
+  .card, .panel, .box,
+  [class*="card"], [class*="Card"],
+  [class*="panel"], [class*="Panel"],
+  [class*="module"], [class*="Module"],
+  [class*="widget"], [class*="Widget"]
+){
+  /* The calc() lets us turn glow on/off with --GLOW-ON */
+  box-shadow:
+    0 0 calc(var(--GLOW-STRENGTH) * var(--GLOW-ON)) rgba(255,141,184,var(--GLOW-ALPHA)),
+    0 0 calc((var(--GLOW-STRENGTH) + 10px) * var(--GLOW-ON)) rgba(216,15,58, calc(var(--GLOW-ALPHA) * .60)),
+    var(--SHADOW) !important;
+}
+
+
+/* =========================================================
+   10) Images + dividers (soft)
+   ========================================================= */
+.profile-page img{
+  border-radius: 14px;
+  box-shadow: 0 10px 22px rgba(56,18,34,.10);
+}
+
+.profile-page hr{
+  border: none !important;
+  height: 1px !important;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(216,15,58,.28),
+    rgba(255,141,184,.34),
+    transparent
+  ) !important;
+  opacity: .95;
+} 
